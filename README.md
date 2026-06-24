@@ -4,6 +4,8 @@ A similarity-search and clustering analysis of NFL quarterback draft prospects. 
 
 According to [The Athletic](https://www.nytimes.com/athletic/5377539/2024/03/29/odds-a-top-10-qb-busts-scoop-city/), 41% of quarterbacks drafted in the first round can be classified as a reach or a bust. Quarterback is the most expensive, highest-stakes position to evaluate in professional sports — this project builds a data-driven "comp finder" to help separate signal from scouting-report noise.
 
+This project began as a final project for a Harvard Extension School data mining course; this repo is a restructured, portfolio-ready version of that original analysis. ChatGPT was used at points during development.
+
 ## What's here
 
 - **`src/qb_similarity/`** — a reusable Python package with the full pipeline: data loading, cleaning/merging, feature engineering, clustering, and FAISS similarity search. Both the notebook and the app import from here, so there's a single source of truth for the logic.
@@ -16,7 +18,7 @@ According to [The Athletic](https://www.nytimes.com/athletic/5377539/2024/03/29/
 Three datasets, merged on cleaned player name:
 
 1. **College stats** ([cfbfastR](https://cfbfastr.sportsdataverse.org)): every FBS quarterback who recorded a stat from 2004–2020.
-2. **NFL combine data** ([nflreadr](https://nflreadr.nflverse.com/reference/index.html)): combine measurables from 2000–2025 (filtered to QBs from the relevant draft window). Ultimately too sparse to use in clustering, so it's excluded from the final feature set.
+2. **NFL combine data** ([nflreadr](https://nflreadr.nflverse.com/reference/index.html)): combine measurables from 2000–2025 (filtered to QBs from the relevant draft window). Too sparse to use in clustering, so it's dropped there — it's still part of the similarity-search feature set.
 3. **NFL draft/career results** ([Pro Football Reference](https://www.pro-football-reference.com) StatHead): every QB drafted 2005–2021, with draft position and [Approximate Value](https://www.pro-football-reference.com/about/approximate_value.htm) (AV) as a proxy for career quality.
 
 Raw files live in `data/`. See the notebook's appendix for a full column-by-column explanation.
@@ -62,7 +64,3 @@ streamlit run app.py
 - Height/weight and advanced college statistics would likely improve the model, but no public dataset had enough coverage of them for this QB population.
 - The dataset is small even though it's the full population of relevant QBs — results for cluster 12 are encouraging but it's only 34 players, and OPTICS in particular struggled to find structure given so few positive examples.
 - Next steps: capture college-team-level features (scheme, competition quality) directly rather than only through hashed conference/school; analyze combine-invited athletes as a separate cohort; and explore how much NFL outcomes depend on situation/team quality rather than the QB's own traits.
-
-## Citations
-
-- ChatGPT was used to help write the multi-value groupby aggregation in `qb_similarity/cleaning.py`, the height-string parsing in `qb_similarity/features.py`, and the `np.hstack` usage for combining hashed feature arrays before PCA in `qb_similarity/features.py`. See the notebook's citations section for the exact queries.
