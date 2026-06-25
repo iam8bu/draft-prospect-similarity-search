@@ -1,5 +1,7 @@
 # College to Pro: NFL Draft QB Prospect Similarity Search
 
+**[Try the live demo →](https://draft-prospect-similarity-search-2emjuq9l8ivtwk6vpfsfz9.streamlit.app)**
+
 A similarity-search and clustering analysis of NFL quarterback draft prospects. Given a college quarterback, it finds the historical QBs whose college stats, draft profile, and school/conference most closely resemble them — and surfaces the traits that actually separate NFL hits from busts.
 
 According to [The Athletic](https://www.nytimes.com/athletic/5377539/2024/03/29/odds-a-top-10-qb-busts-scoop-city/), 41% of quarterbacks drafted in the first round can be classified as a reach or a bust. Quarterback is the most expensive, highest-stakes position to evaluate in professional sports — this project builds a data-driven "comp finder" to help separate signal from scouting-report noise.
